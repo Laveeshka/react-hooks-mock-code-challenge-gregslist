@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Header from "./Header";
 import ListingsContainer from "./ListingsContainer";
+import NewListingForm from "./NewListingForm";
 
 function App() {
   //set up state
@@ -27,6 +28,11 @@ function App() {
     setListings(updatedListings);
   }
 
+  function addNewListing(newListing){
+    const newListings = [...listings, newListing];
+    setListings(newListings);
+  }
+
   const visibleListings = listings.filter(listing => listing.description.toLowerCase().includes(searchText.toLowerCase()));
   if (selectedSortValue === "location"){
     visibleListings.sort((a, b) => a.location.localeCompare(b.location));
@@ -35,6 +41,7 @@ function App() {
   return (
     <div className="app">
       <Header onSearchListing={setSearchText} onSort={setSelectedSortValue}/>
+      <NewListingForm onListingFormSubmit={addNewListing}/>
       <ListingsContainer listings={visibleListings} onDeleteListing={handleDeleteListing}/>
     </div>
   );

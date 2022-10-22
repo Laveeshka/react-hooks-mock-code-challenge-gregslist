@@ -35,6 +35,12 @@
       "description": "Beautiful couch",
       "image": "./images/couch.jpg",
       "location": "Bay Ridge"
+    },
+    {
+      "description": "X75K | 4K Ultra HD | High Dynamic Range (HDR) | Smart TV (Google TV)",
+      "image": "https://www.sony.com.au/image/5a01a9fdb85a075ce2d715c1254b08ab?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF",
+      "location": "Collingwood",
+      "id": 7
     }
   ]
 }
