@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 
-function ListingCard({ listing }) {
+function ListingCard({ listing, onDeleteListing }) {
   //set up state for favourite
   const [isFavourite, setIsFavourite] = useState(true);
 
   //destructure listing object
-  const { description, image, location } = listing;
+  const { id, description, image, location } = listing;
 
   //handler to toggle isFavourite state on button click
   function toggleIsFavourite(){
     setIsFavourite(prevState => !prevState);
+  }
+
+  //handler to delete listing on button click
+  //invokes the callback function prop
+  function handleDeleteListing(){
+    fetch(`http://localhost:6001/listings/${id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(() => onDeleteListing(listing))
   }
 
   return (
@@ -26,7 +36,7 @@ function ListingCard({ listing }) {
         )}
         <strong>{description}</strong>
         <span> · {location}</span>
-        <button className="emoji-button delete">🗑</button>
+        <button className="emoji-button delete" onClick={handleDeleteListing}>🗑</button>
       </div>
     </li>
   );

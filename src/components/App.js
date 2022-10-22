@@ -19,10 +19,16 @@ function App() {
 
   console.log(`Listings are ${listings}`);
 
+  function handleDeleteListing(deletedListing){
+    //update state
+    const updatedListings = listings.filter(listing => listing.id !== deletedListing.id);
+    setListings(updatedListings);
+  }
+
   return (
     <div className="app">
       <Header />
-      <ListingsContainer listings={listings}/>
+      <ListingsContainer listings={listings} onDeleteListing={handleDeleteListing}/>
     </div>
   );
 }
