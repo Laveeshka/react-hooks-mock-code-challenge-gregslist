@@ -5,6 +5,7 @@ import ListingsContainer from "./ListingsContainer";
 function App() {
   //set up state
   const [listings, setListings] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   //useEffect hook to fetch listings onMount
   //update state
@@ -25,10 +26,12 @@ function App() {
     setListings(updatedListings);
   }
 
+  const visibleListings = listings.filter(listing => listing.description.toLowerCase().includes(searchText.toLowerCase()));
+
   return (
     <div className="app">
-      <Header />
-      <ListingsContainer listings={listings} onDeleteListing={handleDeleteListing}/>
+      <Header onSearchListing={setSearchText}/>
+      <ListingsContainer listings={visibleListings} onDeleteListing={handleDeleteListing}/>
     </div>
   );
 }
