@@ -6,6 +6,7 @@ function App() {
   //set up state
   const [listings, setListings] = useState([]);
   const [searchText, setSearchText] = useState("");
+	const [selectedSortValue, setSelectedSortValue] = useState("default");
 
   //useEffect hook to fetch listings onMount
   //update state
@@ -27,10 +28,13 @@ function App() {
   }
 
   const visibleListings = listings.filter(listing => listing.description.toLowerCase().includes(searchText.toLowerCase()));
+  if (selectedSortValue === "location"){
+    visibleListings.sort((a, b) => a.location.localeCompare(b.location));
+  }
 
   return (
     <div className="app">
-      <Header onSearchListing={setSearchText}/>
+      <Header onSearchListing={setSearchText} onSort={setSelectedSortValue}/>
       <ListingsContainer listings={visibleListings} onDeleteListing={handleDeleteListing}/>
     </div>
   );
